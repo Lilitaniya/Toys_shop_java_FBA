@@ -4,18 +4,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ToysShop {
-
+public class ToyRaffle {
     // Очередь с приоритетом для хранения игрушек. Игрушки упорядочены по весу, при этом игрушки с меньшим весом имеют более высокий приоритет.
     private PriorityQueue<Toy> toys;
-
     // Генератор случайных чисел для выбора игрушек.
     private Random random;
-    public ToysShop(String[] toyData) {
+    public ToyRaffle(String[] toyData) {
         // Инициализация очереди с приоритетом и генератора случайных чисел.
         toys = new PriorityQueue<>();
         random = new Random();
-
         // Добавление игрушек в очередь с приоритетом.
         for (String toy : toyData) {
             String[] fields = toy.split(",");
@@ -50,15 +47,14 @@ public class ToysShop {
         // Возвращение выбранной игрушки.
         return selectedToy;
     }
-
     public static void main(String[] args) {
         // Данные об игрушках в формате "id,название,вес".
         String[] toyData = {
-                "1,Мишка Тедди,10",
-                "2,Куколка,8",
-                "3,Фигурка героя,6",
-                "4,Фигурка из Геншина,4",
-                "5,Паззлы,2"
+                "1,Мягкие игрушки персонажей Геншин Импакт,10",
+                "2,Куклы Барби,8",
+                "3,Фигурки аниме,6",
+                "4,Браслеты аниме,4",
+                "5,Паззлы и головоломки,2"
         };
         // Создание объекта класса ToyRaffle.
         ToyRaffle raffle = new ToyRaffle(toyData);
@@ -81,15 +77,11 @@ public class ToysShop {
             e.printStackTrace();
         }
     }
-
     private static class Toy implements Comparable<Toy> {
-
         // Идентификатор игрушки.
         private int id;
-
         // Название игрушки.
         private String name;
-
         // Вес игрушки.
         private int weight;
 
@@ -98,19 +90,15 @@ public class ToysShop {
             this.name = name;
             this.weight = weight;
         }
-
         public int getId() {
             return id;
         }
-
         public String getName() {
             return name;
         }
-
         public int getWeight() {
             return weight;
         }
-
         @Override
         public int compareTo(Toy other) {
             // Сравнение игрушек по весу.
