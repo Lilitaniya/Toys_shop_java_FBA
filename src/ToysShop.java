@@ -26,3 +26,24 @@ public class ToysShop {
             toys.add(new Toy(id, name, weight));
         }
     }
+    public Toy getToy() {
+        // Подсчёт общего веса всех игрушек.
+        int totalWeight = 0;
+        for (Toy toy : toys) {
+            totalWeight += toy.getWeight();
+        }
+
+        // Выбор случайного веса в пределах общего веса всех игрушек.
+        int randomWeight = random.nextInt(totalWeight);
+
+        // Выбор игрушки с весом, который больше или равен случайному весу.
+        int currentWeight = 0;
+        Toy selectedToy = null;
+
+        for (Toy toy : toys) {
+            currentWeight += toy.getWeight();
+            if (randomWeight < currentWeight) {
+                selectedToy = toy;
+                break;
+            }
+        }
