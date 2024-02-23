@@ -60,3 +60,61 @@ public class ToysShop {
                 "4,Фигурка из Геншина,4",
                 "5,Паззлы,2"
         };
+        // Создание объекта класса ToyRaffle.
+        ToyRaffle raffle = new ToyRaffle(toyData);
+
+        // Создание файла для записи результатов розыгрыша.
+        try {
+            File file = new File("toy_raffle_results.txt");
+            FileWriter writer = new FileWriter(file);
+
+            // Проведение розыгрыша 10 игрушек и запись результатов в файл.
+            for (int i = 0; i < 10; i++) {
+                Toy toy = raffle.getToy();
+                writer.write(toy.getName() + "\n");
+            }
+
+            // Закрытие файла.
+            writer.close();
+        } catch (IOException e) {
+            // Обработка исключения ввода-вывода.
+            e.printStackTrace();
+        }
+    }
+
+    private static class Toy implements Comparable<Toy> {
+
+        // Идентификатор игрушки.
+        private int id;
+
+        // Название игрушки.
+        private String name;
+
+        // Вес игрушки.
+        private int weight;
+
+        public Toy(int id, String name, int weight) {
+            this.id = id;
+            this.name = name;
+            this.weight = weight;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        @Override
+        public int compareTo(Toy other) {
+            // Сравнение игрушек по весу.
+            return Integer.compare(this.weight, other.weight);
+        }
+    }
+}
